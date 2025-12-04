@@ -3,7 +3,7 @@
 <div class="mt-10 flex items-center justify-center">
     <div class="w-full max-w-md">
         <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <!-- Inicio del cuadro -->
+            <!-- header del cuadro -->
             <div class="bg-slate-800 px-6 py-4">
                 <div class="flex items-center gap-3">
                     <div class="h-9 w-9 flex items-center justify-center rounded-lg bg-white text-neutral-900 text-xs font-bold leading-tight shadow">
@@ -11,16 +11,16 @@
                     </div>
                     <div class="flex flex-col">
                         <h1 class="text-white text-lg font-semibold">
-                            Iniciar sesión
+                            Crear cuenta
                         </h1>
-                        <p class="text-[11px] text-blue-100">
-                            Accede al centro de soporte de Los Patitos S.A.
+                        <p class="text-[11px] text-gray-200">
+                            Registra un nuevo usuario para el sistema de tickets.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- espacios de texto del cuadro -->
+            <!-- Espacios del cuadro -->
             <div class="px-6 py-6">
                 <?php if (isset($error)): ?>
                     <div class="mb-4 text-sm text-red-700 bg-red-100 border border-red-200 px-3 py-2 rounded-md">
@@ -28,7 +28,7 @@
                     </div>
                 <?php endif; ?>
 
-                <form action="/login" method="POST" class="space-y-4">
+                <form action="/register" method="POST" class="space-y-4">
                     <div>
                         <label for="username" class="block text-sm font-medium text-gray-700">
                             Usuario
@@ -40,7 +40,7 @@
                             required
                             class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
                                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Escribe tu usuario"
+                            placeholder="Escribe el nombre de usuario"
                         >
                     </div>
 
@@ -59,28 +59,39 @@
                         >
                     </div>
 
+                    <div>
+                        <label for="confirm_password" class="block text-sm font-medium text-gray-700">
+                            Confirmar contraseña
+                        </label>
+                        <input
+                            type="password"
+                            id="confirm_password"
+                            name="confirm_password"
+                            required
+                            class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
+                                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Vuelve a escribir la contraseña"
+                        >
+                    </div>
+
                     <button
                         type="submit"
                         class="w-full mt-2 inline-flex justify-center items-center px-4 py-2.5
                                bg-slate-600 hover:bg-slate-700 text-white text-sm font-semibold
                                rounded-md shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1">
-                        Ingresar
+                        Registrarse
                     </button>
                 </form>
             </div>
 
-            <!-- parte de abajo del cuadro -->
+            <!-- final del cuadro-->
             <div class="px-6 pb-4 text-[11px] text-gray-500">
                 <p>
-                    ¿Olvidaste tu usuario o contraseña?
-                    <span class="text-blue-600">Contacta al administrador del sistema.</span>
+                    ¿Ya tienes una cuenta?
+                    <a href="/login" class="text-blue-600 hover:underline">Inicia sesión aquí.</a>
                 </p>
             </div>
         </div>
-
-        <p class="mt-4 text-center text-xs text-gray-500">
-            Serás redirigido al panel de Tickets después de iniciar sesión correctamente.
-        </p>
     </div>
 </div>
 
