@@ -1,11 +1,9 @@
--- Roles
 CREATE TABLE roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(255)
 );
 
--- Usuarios
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     fullname VARCHAR(150) NOT NULL,
@@ -18,21 +16,18 @@ CREATE TABLE users (
     FOREIGN KEY (roleId) REFERENCES roles(id)
 );
 
--- Tipos de ticket
 CREATE TABLE types (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(255)
 );
 
--- Estados del ticket
 CREATE TABLE status (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(255)
 );
 
--- Tabla principal de tickets
 CREATE TABLE tickets (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
@@ -49,27 +44,25 @@ CREATE TABLE tickets (
     FOREIGN KEY (assignedTo) REFERENCES users(id)
 );
 
--- Entradas del historial de tickets
 CREATE TABLE entries (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    ticket_id INT NOT NULL,
-    author_id INT NOT NULL,
+    ticketId INT NOT NULL,
+    authorId INT NOT NULL,
     body TEXT NOT NULL,
-    from_status_id INT DEFAULT NULL,
-    to_status_id INT DEFAULT NULL,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (ticket_id) REFERENCES tickets(id),
-    FOREIGN KEY (author_id) REFERENCES users(id),
-    FOREIGN KEY (from_status_id) REFERENCES status(id),
-    FOREIGN KEY (to_status_id) REFERENCES status(id)
+    fromStatusId INT DEFAULT NULL,
+    toStatusId INT DEFAULT NULL,
+    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ticketId) REFERENCES tickets(id),
+    FOREIGN KEY (authorId) REFERENCES users(id),
+    FOREIGN KEY (fromStatusId) REFERENCES status(id),
+    FOREIGN KEY (toStatusId) REFERENCES status(id)
 );
 
--- Transiciones válidas de estado (opcional pero recomendado)
 CREATE TABLE transitions (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    from_status_id INT NOT NULL,
-    to_status_id INT NOT NULL,
-    UNIQUE KEY unique_transition (from_status_id, to_status_id),
-    FOREIGN KEY (from_status_id) REFERENCES status(id),
-    FOREIGN KEY (to_status_id) REFERENCES status(id)
+    fromStatusId INT NOT NULL,
+    toStatusId INT NOT NULL,
+    UNIQUE KEY unique_transition (fromStatusId, toStatusId),
+    FOREIGN KEY (fromStatusId) REFERENCES status(id),
+    FOREIGN KEY (toStatusId) REFERENCES status(id)
 );

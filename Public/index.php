@@ -23,8 +23,8 @@ if (isset($env['DEBUG']) && filter_var($env['DEBUG'], FILTER_VALIDATE_BOOLEAN)) 
     error_reporting(0);
 }
 
-// Database connection
-require_once __DIR__ . '/../config/database.php';
+// Database class (connection se obtiene en los modelos)
+require_once __DIR__ . '/../Config/database.php';
 
 // Simple Autoloader
 spl_autoload_register(function ($class) {

@@ -21,16 +21,17 @@ class AuthController extends Controller
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $user = User::findByUsername($username);
+        $userModel = new User();
+        $user = $userModel->findByUsername($username);
 
-        if ($user && password_verify($password, $user->password)) {
+        if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user'] = [
-                'id' => $user->id,
-                'username' => $user->username
+                'id' => $user['id'],
+                'username' => $user['username']
             ];
             header('Location: /');
         } else {
-            return $this->view('auth/login', ['error' => 'Credenciales inválidas']);
+            return $this->view('auth/login', ['error' => 'Credenciales invケlidas']);
         }
     }
 
@@ -50,14 +51,16 @@ class AuthController extends Controller
         $confirm_password = $_POST['confirm_password'];
 
         if ($password !== $confirm_password) {
-            return $this->view('auth/register', ['error' => 'Las contraseñas no coinciden']);
+            return $this->view('auth/register', ['error' => 'Las contraseヵas no coinciden']);
         }
 
-        if (User::findByUsername($username)) {
+        $userModel = new User();
+
+        if ($userModel->findByUsername($username)) {
             return $this->view('auth/register', ['error' => 'El usuario ya existe']);
         }
 
-        User::create([
+        $userModel->create([
             'username' => $username,
             'password' => $password
         ]);

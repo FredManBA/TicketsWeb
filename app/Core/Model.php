@@ -2,29 +2,14 @@
 
 namespace App\Core;
 
-use PDO;
+require_once __DIR__ . '/../../Config/database.php';
 
 class Model
 {
-    protected static $pdo;
+    protected $db;
 
-    public static function connection()
+    public function __construct()
     {
-        if (!isset(self::$pdo)) {
-            $config = require __DIR__ . '/../../config/database.php';
-
-            try {
-                self::$pdo = new PDO(
-                    "mysql:host={$config['host']};dbname={$config['dbname']};charset={$config['charset']}",
-                    $config['username'],
-                    $config['password']
-                );
-                self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (\PDOException $e) {
-                die('Could not connect to the database: ' . $e->getMessage());
-            }
-        }
-
-        return self::$pdo;
+        $this->db = \Database::getConnection();
     }
 }
