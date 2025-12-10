@@ -33,17 +33,17 @@
                 </a>
 
                 <?php if (isset($_SESSION['user'])): ?>
-                    <a href="/vehicles"
+                    <a href="/tickets"
                        class="text-gray-300 hover:text-white hover:underline">
                         Tickets
                     </a>
-                    <a href="/brands"
+                    <a href="/users"
                        class="text-gray-300 hover:text-white hover:underline">
                         Crear usuario
                     </a>
-                    <a href="/owners"
+                    <a href="/status"
                        class="text-gray-300 hover:text-white hover:underline">
-                        Configuración
+                        Configuracion
                     </a>
                 <?php else: ?>
                     <a href="/login"
@@ -76,7 +76,7 @@
                                class="block px-4 py-2 text-gray-200 hover:bg-neutral-800">
                                 Perfil
                             </a>
-                            <a href="/vehicles"
+                            <a href="/tickets"
                                class="block px-4 py-2 text-gray-200 hover:bg-neutral-800">
                                 Mis tickets
                             </a>
@@ -89,7 +89,7 @@
                     </div>
 
 
-                    <a href="/vehicles"
+                    <a href="/tickets"
                        class= "inline-flex items-center px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 font-semibold text-xs uppercase tracking-wide">
                         Ver tickets
                     </a>
@@ -126,14 +126,14 @@
             </a>
 
             <?php if (isset($_SESSION['user'])): ?>
-                <a href="/vehicles" class="block text-gray-200 hover:text-white">
+                <a href="/tickets" class="block text-gray-200 hover:text-white">
                     Tickets
                 </a>
-                <a href="/brands" class="block text-gray-200 hover:text-white">
+                <a href="/users" class="block text-gray-200 hover:text-white">
                     Crear usuario
                 </a>
-                <a href="/owners" class="block text-gray-200 hover:text-white">
-                    Configuración
+                <a href="/status" class="block text-gray-200 hover:text-white">
+                    Configuracion
                 </a>
                 <a href="/profile" class="block text-gray-200 hover:text-white">
                     Perfil

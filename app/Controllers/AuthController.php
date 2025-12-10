@@ -18,20 +18,26 @@ class AuthController extends Controller
 
     public function authenticate()
     {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = trim($_POST['username'] ?? '');
+        $password = $_POST['password'] ?? '';
 
         $userModel = new User();
         $user = $userModel->findByUsername($username);
 
-        if ($user && password_verify($password, $user['password'])) {
+        if (
+            $user &&
+            (int) ($user['isActive'] ?? 0) === 1 &&
+            password_verify($password, $user['passwordHash'])
+        ) {
             $_SESSION['user'] = [
                 'id' => $user['id'],
-                'username' => $user['username']
+                'username' => $user['username'],
+                'fullname' => $user['fullname'],
+                'roleId' => $user['roleId'],
             ];
             header('Location: /');
         } else {
-            return $this->view('auth/login', ['error' => 'Credenciales invケlidas']);
+            return $this->view('auth/login', ['error' => 'Credenciales invalidas o usuario inactivo']);
         }
     }
 
@@ -46,12 +52,17 @@ class AuthController extends Controller
 
     public function store()
     {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
+        $fullname = trim($_POST['fullname'] ?? '');
+        $username = trim($_POST['username'] ?? '');
+        $password = $_POST['password'] ?? '';
+        $confirm_password = $_POST['confirm_password'] ?? '';
 
         if ($password !== $confirm_password) {
-            return $this->view('auth/register', ['error' => 'Las contraseヵas no coinciden']);
+            return $this->view('auth/register', ['error' => 'Las contrasenas no coinciden']);
+        }
+
+        if ($fullname === '' || $username === '') {
+            return $this->view('auth/register', ['error' => 'Nombre completo y usuario son obligatorios']);
         }
 
         $userModel = new User();
@@ -61,8 +72,11 @@ class AuthController extends Controller
         }
 
         $userModel->create([
+            'fullname' => $fullname,
             'username' => $username,
-            'password' => $password
+            'password' => $password,
+            'roleId' => 1,
+            'isActive' => 1,
         ]);
 
         header('Location: /login');

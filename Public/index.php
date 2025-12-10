@@ -48,28 +48,50 @@ $router = new Router();
 
 // Define routes
 $router->add('GET', '/', 'HomeController@index');
-$router->add('GET', '/vehicles', 'VehicleController@index');
-$router->add('GET', '/vehicles/create', 'VehicleController@create');
-$router->add('POST', '/vehicles/store', 'VehicleController@store');
-$router->add('GET', '/vehicles/edit/{id}', 'VehicleController@edit');
-$router->add('POST', '/vehicles/update/{id}', 'VehicleController@update');
-$router->add('GET', '/vehicles/delete/{id}', 'VehicleController@delete');
 
-// Brand Routes
-$router->add('GET', '/brands', 'BrandController@index');
-$router->add('GET', '/brands/create', 'BrandController@create');
-$router->add('POST', '/brands/store', 'BrandController@store');
-$router->add('GET', '/brands/edit/{id}', 'BrandController@edit');
-$router->add('POST', '/brands/update/{id}', 'BrandController@update');
-$router->add('GET', '/brands/delete/{id}', 'BrandController@delete');
+// Ticket Routes
+$router->add('GET', '/tickets', 'TicketController@index');
+$router->add('GET', '/tickets/{id}', 'TicketController@show');
+$router->add('POST', '/tickets', 'TicketController@store');
+$router->add('POST', '/tickets/{id}/update', 'TicketController@update');
+$router->add('POST', '/tickets/{id}/delete', 'TicketController@delete');
 
-// Owner Routes
-$router->add('GET', '/owners', 'OwnerController@index');
-$router->add('GET', '/owners/create', 'OwnerController@create');
-$router->add('POST', '/owners/store', 'OwnerController@store');
-$router->add('GET', '/owners/edit/{id}', 'OwnerController@edit');
-$router->add('POST', '/owners/update/{id}', 'OwnerController@update');
-$router->add('GET', '/owners/delete/{id}', 'OwnerController@delete');
+// Ticket entries (comentarios)
+$router->add('GET', '/tickets/{id}/entries', 'EntryController@index');
+$router->add('POST', '/tickets/{id}/entries', 'EntryController@store');
+
+// Type Routes
+$router->add('GET', '/types', 'TypeController@index');
+$router->add('GET', '/types/{id}', 'TypeController@show');
+$router->add('POST', '/types', 'TypeController@store');
+$router->add('POST', '/types/{id}/update', 'TypeController@update');
+$router->add('POST', '/types/{id}/delete', 'TypeController@delete');
+
+// Status Routes
+$router->add('GET', '/status', 'StatusController@index');
+$router->add('GET', '/status/{id}', 'StatusController@show');
+$router->add('POST', '/status', 'StatusController@store');
+$router->add('POST', '/status/{id}/update', 'StatusController@update');
+$router->add('POST', '/status/{id}/delete', 'StatusController@delete');
+
+// Role Routes
+$router->add('GET', '/roles', 'RoleController@index');
+$router->add('GET', '/roles/{id}', 'RoleController@show');
+$router->add('POST', '/roles', 'RoleController@store');
+$router->add('POST', '/roles/{id}/update', 'RoleController@update');
+$router->add('POST', '/roles/{id}/delete', 'RoleController@delete');
+
+// User Routes
+$router->add('GET', '/users', 'UserController@index');
+$router->add('GET', '/users/{id}', 'UserController@show');
+$router->add('POST', '/users', 'UserController@store');
+$router->add('POST', '/users/{id}/update', 'UserController@update');
+$router->add('POST', '/users/{id}/delete', 'UserController@delete');
+
+// Transition Routes
+$router->add('GET', '/transitions', 'TransitionController@index');
+$router->add('POST', '/transitions', 'TransitionController@store');
+$router->add('POST', '/transitions/{id}/delete', 'TransitionController@delete');
 
 // Auth Routes
 $router->add('GET', '/login', 'AuthController@login');

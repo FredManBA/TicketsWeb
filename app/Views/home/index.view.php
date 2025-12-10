@@ -10,7 +10,7 @@
         </p>
 
         <?php if (isset($_SESSION['user'])): ?>
-            <a href="/vehicles"
+            <a href="/tickets"
                class="inline-block mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm md:text-base rounded-md shadow-md transition">
                 Ver Tickets
             </a>

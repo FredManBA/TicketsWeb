@@ -52,9 +52,9 @@ class Database
 
         return [
             'host' => $env['DB_HOST'] ?? '127.0.0.1',
-            'dbname' => $env['DB_NAME'] ?? 'mydatabase',
-            'username' => $env['DB_USER'] ?? 'root',
-            'password' => $env['DB_PASS'] ?? 'toor',
+            'dbname' => $env['DB_NAME'] ?? 'ticketsweb',
+            'username' => $env['DB_USER'] ?? 'phpuser',
+            'password' => $env['DB_PASS'] ?? 'secret',
             'charset' => $env['DB_CHARSET'] ?? 'utf8mb4',
         ];
     }
