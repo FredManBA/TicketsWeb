@@ -18,7 +18,7 @@ class ProfileController extends Controller
     public function edit()
     {
         $user = User::find($_SESSION['user']['id']);
-        return $this->view('profile/edit', ['user' => $user]);
+        return $this->view('users/edit', ['user' => $user]);
     }
 
     public function update()
@@ -30,14 +30,14 @@ class ProfileController extends Controller
 
         if (!empty($password) && $password !== $confirm_password) {
             $user = User::find($id);
-            return $this->view('profile/edit', ['user' => $user, 'error' => 'Las contraseñas no coinciden']);
+            return $this->view('users/edit', ['user' => $user, 'error' => 'Las contraseñas no coinciden']);
         }
 
         // Check if username is taken by another user
         $existingUser = User::findByUsername($username);
         if ($existingUser && $existingUser->id != $id) {
             $user = User::find($id);
-            return $this->view('profile/edit', ['user' => $user, 'error' => 'El nombre de usuario ya está en uso']);
+            return $this->view('users/edit', ['user' => $user, 'error' => 'El nombre de usuario ya está en uso']);
         }
 
         $data = ['username' => $username];
@@ -51,7 +51,7 @@ class ProfileController extends Controller
         $_SESSION['user']['username'] = $username;
 
         $user = User::find($id);
-        return $this->view('profile/edit', ['user' => $user, 'success' => 'Perfil actualizado correctamente']);
+        return $this->view('users/edit', ['user' => $user, 'success' => 'Perfil actualizado correctamente']);
     }
 }
 
