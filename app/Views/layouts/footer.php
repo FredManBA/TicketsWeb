@@ -20,7 +20,31 @@
     </div>
 </footer>
 
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const accountToggle = document.getElementById('account-toggle');
+    const accountMenu = document.getElementById('account-menu');
+
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+
+    if (accountToggle && accountMenu) {
+        accountToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            accountMenu.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', () => {
+            if (!accountMenu.classList.contains('hidden')) {
+                accountMenu.classList.add('hidden');
+            }
+        });
+    }
+</script>
+
 </body>
 </html>
-
-

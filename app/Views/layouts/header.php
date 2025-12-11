@@ -144,31 +144,5 @@
 </header>
 
 <!-- Contenedor principal -->
-<div class="max-w-6xl mx-auto mt-4 px-4">
-    <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const accountToggle = document.getElementById('account-toggle');
-        const accountMenu = document.getElementById('account-menu');
-
-        if (menuToggle && mobileMenu) {
-            menuToggle.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-
-        if (accountToggle && accountMenu) {
-            accountToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                accountMenu.classList.toggle('hidden');
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!accountMenu.classList.contains('hidden')) {
-                    accountMenu.classList.add('hidden');
-                }
-            });
-        }
-    </script>
-</body>
-</html>
+<main class="flex flex-col min-h-screen">
+    <div class="max-w-6xl mx-auto mt-4 px-4 flex-1 w-full">
