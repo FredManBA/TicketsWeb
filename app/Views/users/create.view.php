@@ -28,7 +28,34 @@
                     </div>
                 <?php endif; ?>
 
-                <form action="/register" method="POST" class="space-y-4">
+                <?php if (!empty($_SESSION['flash_error'])): ?>
+                    <div class="mb-4 text-sm text-red-700 bg-red-100 border border-red-200 px-3 py-2 rounded-md">
+                        <?= htmlspecialchars($_SESSION['flash_error'], ENT_QUOTES, 'UTF-8') ?>
+                    </div>
+                    <?php unset($_SESSION['flash_error']); ?>
+                <?php endif; ?>
+                <?php if (!empty($_SESSION['flash_success'])): ?>
+                    <div class="mb-4 text-sm text-green-700 bg-green-100 border border-green-200 px-3 py-2 rounded-md">
+                        <?= htmlspecialchars($_SESSION['flash_success'], ENT_QUOTES, 'UTF-8') ?>
+                    </div>
+                    <?php unset($_SESSION['flash_success']); ?>
+                <?php endif; ?>
+
+                <form action="/users" method="POST" class="space-y-4">
+                    <div>
+                        <label for="fullname" class="block text-sm font-medium text-gray-700">
+                            Nombre completo
+                        </label>
+                        <input
+                            type="text"
+                            id="fullname"
+                            name="fullname"
+                            required
+                            class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
+                                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Nombre y apellidos"
+                        >
+                    </div>
                     <div>
                         <label for="username" class="block text-sm font-medium text-gray-700">
                             Usuario

@@ -99,4 +99,40 @@ class User extends Model
         $statement = $this->db->prepare("DELETE FROM {$this->table} WHERE id = :id");
         return $statement->execute([':id' => $id]);
     }
+
+    public function deactivate(int $id): bool
+    {
+        $statement = $this->db->prepare(
+            "UPDATE {$this->table} SET isActive = 0 WHERE id = :id"
+        );
+        return $statement->execute([':id' => $id]);
+    }
+
+    public function findByRole(int $roleId, bool $onlyActive = false): array
+    {
+        $params = [':roleId' => $roleId];
+        $activeClause = '';
+
+        if ($onlyActive) {
+            $activeClause = ' AND isActive = 1';
+        }
+
+        $statement = $this->db->prepare(
+            "SELECT id, fullname, username, roleId, isActive
+             FROM {$this->table}
+             WHERE roleId = :roleId {$activeClause}
+             ORDER BY fullname ASC"
+        );
+        $statement->execute($params);
+
+        return $statement->fetchAll();
+    }
+
+    public function activate(int $id): bool
+    {
+        $statement = $this->db->prepare(
+            "UPDATE {$this->table} SET isActive = 1 WHERE id = :id"
+        );
+        return $statement->execute([':id' => $id]);
+    }
 }

@@ -32,24 +32,33 @@
                     Inicio
                 </a>
 
-                <?php if (isset($_SESSION['user'])): ?>
-                    <a href="/tickets"
-                       class="text-gray-300 hover:text-white hover:underline">
-                        Tickets
-                    </a>
-                    <a href="/users"
-                       class="text-gray-300 hover:text-white hover:underline">
-                        Crear usuario
-                    </a>
-                    <a href="/status"
-                       class="text-gray-300 hover:text-white hover:underline">
-                        Configuracion
-                    </a>
-                <?php else: ?>
+                <?php if (!isset($_SESSION['user'])): ?>
                     <a href="/login"
                        class="text-gray-300 hover:text-white hover:underline">
-                        Ayuda / Soporte
+                        Iniciar sesion
                     </a>
+                <?php else: ?>
+                    <?php $roleId = $_SESSION['user']['roleId'] ?? null; ?>
+                    <?php if ($roleId === 3): ?>
+                        <a href="/user/dashboard"
+                           class="text-gray-300 hover:text-white hover:underline">
+                            Mi panel
+                        </a>
+                    <?php elseif ($roleId === 2): ?>
+                        <a href="/operator/dashboard"
+                           class="text-gray-300 hover:text-white hover:underline">
+                            Panel operador
+                        </a>
+                    <?php elseif ($roleId === 1): ?>
+                        <a href="/admin/dashboard"
+                           class="text-gray-300 hover:text-white hover:underline">
+                            Panel admin
+                        </a>
+                        <a href="/users"
+                           class="text-gray-300 hover:text-white hover:underline">
+                            Usuarios
+                        </a>
+                    <?php endif; ?>
                 <?php endif; ?>
             </nav>
 
@@ -62,7 +71,7 @@
                             class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-neutral-800 hover:bg-neutral-700">
                             <span class="text-xs text-gray-300">Mi cuenta</span>
                             <span class="font-semibold text-sm">
-                                <?= htmlspecialchars($_SESSION['user']['username']) ?>
+                                <?= htmlspecialchars($_SESSION['user']['fullname'] ?? $_SESSION['user']['username']) ?>
                             </span>
                             <svg class="h-4 w-4 text-gray-300" xmlns="http://www.w3.org/2000/svg"
                                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,38 +85,24 @@
                                class="block px-4 py-2 text-gray-200 hover:bg-neutral-800">
                                 Perfil
                             </a>
-                            <a href="/tickets"
-                               class="block px-4 py-2 text-gray-200 hover:bg-neutral-800">
-                                Mis tickets
-                            </a>
                             <div class="border-t border-neutral-700 my-1"></div>
                             <a href="/logout"
                                class="block px-4 py-2 text-red-400 hover:bg-neutral-800">
-                                Cerrar sesión
+                                Cerrar sesion
                             </a>
                         </div>
                     </div>
-
-
-                    <a href="/tickets"
-                       class= "inline-flex items-center px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 font-semibold text-xs uppercase tracking-wide">
-                        Ver tickets
-                    </a>
                 <?php else: ?>
                     <a href="/login"
                        class="text-gray-200 hover:text-white" >
-                        Iniciar sesión
-                    </a>
-                    <a href="/register"
-                       class="inline-flex items-center px-4 py-2 rounded-md bg-slate-600 hover:bg-slate-700 font-semibold text-xs uppercase tracking-wide">
-                        Registrarse
+                        Iniciar sesion
                     </a>
                 <?php endif; ?>
             </div>
 
             <button id="menu-toggle"
                     class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-900 focus:ring-blue-400">
-                <span class="sr-only">Abrir menú</span>
+                <span class="sr-only">Abrir menu</span>
                 <svg xmlns="http://www.w3.org/2000/svg"
                      class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor">
@@ -126,30 +121,32 @@
             </a>
 
             <?php if (isset($_SESSION['user'])): ?>
-                <a href="/tickets" class="block text-gray-200 hover:text-white">
-                    Tickets
-                </a>
-                <a href="/users" class="block text-gray-200 hover:text-white">
-                    Crear usuario
-                </a>
-                <a href="/status" class="block text-gray-200 hover:text-white">
-                    Configuracion
-                </a>
+                <?php $roleId = $_SESSION['user']['roleId'] ?? null; ?>
+                <?php if ($roleId === 3): ?>
+                    <a href="/user/dashboard" class="block text-gray-200 hover:text-white">
+                        Mi panel
+                    </a>
+                <?php elseif ($roleId === 2): ?>
+                    <a href="/operator/dashboard" class="block text-gray-200 hover:text-white">
+                        Panel operador
+                    </a>
+                <?php elseif ($roleId === 1): ?>
+                    <a href="/admin/dashboard" class="block text-gray-200 hover:text-white">
+                        Panel admin
+                    </a>
+                    <a href="/users" class="block text-gray-200 hover:text-white">
+                        Usuarios
+                    </a>
+                <?php endif; ?>
                 <a href="/profile" class="block text-gray-200 hover:text-white">
                     Perfil
                 </a>
                 <a href="/logout" class="block text-red-400 hover:text-red-300">
-                    Cerrar sesión
+                    Cerrar sesion
                 </a>
             <?php else: ?>
                 <a href="/login" class="block text-gray-200 hover:text-white">
-                    Iniciar sesión
-                </a>
-                <a href="/register" class="block text-gray-200 hover:text-white">
-                    Registrarse
-                </a>
-                <a href="/login" class="block text-gray-200 hover:text-white">
-                    Ayuda / Soporte
+                    Iniciar sesion
                 </a>
             <?php endif; ?>
         </div>

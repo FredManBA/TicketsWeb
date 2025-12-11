@@ -4,9 +4,51 @@ namespace App\Core;
 
 class Controller
 {
-    protected function view($name, $data = [])
+    public function __construct()
     {
-        return View::render($name, $data);
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+    }
+
+    protected function view(string $path, array $data = [])
+    {
+        return View::render($path, $data);
+    }
+
+    protected function currentUser(): ?array
+    {
+        return $_SESSION['user'] ?? null;
+    }
+
+    protected function isLoggedIn(): bool
+    {
+        return isset($_SESSION['user']);
+    }
+
+    protected function currentRoleId(): ?int
+    {
+        return isset($_SESSION['user']['roleId']) ? (int) $_SESSION['user']['roleId'] : null;
+    }
+
+    protected function requireLogin(): void
+    {
+        if (!$this->isLoggedIn()) {
+            header('Location: /login');
+            exit;
+        }
+    }
+
+    protected function requireRole(array $allowedRoleIds): void
+    {
+        $this->requireLogin();
+
+        $roleId = $this->currentRoleId();
+        if ($roleId === null || !in_array($roleId, $allowedRoleIds, true)) {
+            http_response_code(403);
+            echo 'Acceso denegado.';
+            exit;
+        }
     }
 
     protected function json($data, int $status = 200): void
