@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-require_once __DIR__ . '/../../Config/database.php';
+require_once __DIR__ . '/../../config/database.php';
 
 class Model
 {

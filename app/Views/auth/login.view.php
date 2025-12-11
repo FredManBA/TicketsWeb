@@ -6,7 +6,8 @@
             <!-- Inicio del cuadro -->
             <div class="bg-slate-800 px-6 py-4">
                 <div class="flex items-center gap-3">
-                    <div class="h-9 w-9 flex items-center justify-center rounded-lg bg-white text-neutral-900 text-xs font-bold leading-tight shadow">
+                    <div
+                        class="h-9 w-9 flex items-center justify-center rounded-lg bg-white text-neutral-900 text-xs font-bold leading-tight shadow">
                         TIK<br>WEB
                     </div>
                     <div class="flex flex-col">
@@ -33,34 +34,21 @@
                         <label for="username" class="block text-sm font-medium text-gray-700">
                             Usuario
                         </label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            required
-                            class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
+                        <input type="text" id="username" name="username" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
                                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Escribe tu usuario"
-                        >
+                            placeholder="Escribe tu usuario">
                     </div>
 
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700">
                             Contraseña
                         </label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            required
-                            class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
+                        <input type="password" id="password" name="password" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
                                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="••••••••"
-                        >
+                            placeholder="••••••••">
                     </div>
 
-                    <button
-                        type="submit"
+                    <button type="submit"
                         class="w-full mt-2 inline-flex justify-center items-center px-4 py-2.5
                                bg-slate-600 hover:bg-slate-700 text-white text-sm font-semibold
                                rounded-md shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1">

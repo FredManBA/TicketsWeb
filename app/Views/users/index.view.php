@@ -22,7 +22,20 @@
         </div>
     </div>
 
-    <!-- tabla de datos -->
+    <?php if (!empty($_SESSION['flash_error'])): ?>
+        <div class="mb-4 text-sm text-red-700 bg-red-100 border border-red-200 px-3 py-2 rounded-md">
+            <?= htmlspecialchars($_SESSION['flash_error'], ENT_QUOTES, 'UTF-8') ?>
+        </div>
+        <?php unset($_SESSION['flash_error']); ?>
+    <?php endif; ?>
+
+    <?php if (!empty($_SESSION['flash_success'])): ?>
+        <div class="mb-4 text-sm text-green-700 bg-green-100 border border-green-200 px-3 py-2 rounded-md">
+            <?= htmlspecialchars($_SESSION['flash_success'], ENT_QUOTES, 'UTF-8') ?>
+        </div>
+        <?php unset($_SESSION['flash_success']); ?>
+    <?php endif; ?>
+
     <div class="overflow-x-auto bg-white/80 rounded-xl shadow border border-gray-200">
         <table class="min-w-full text-left text-sm">
             <thead class="bg-slate-900">
@@ -41,7 +54,7 @@
                 <?php foreach ($users as $user): ?>
                     <?php
                         $roleLabel = 'Sin definir';
-                        switch ((int)$user->roleId) {
+                        switch ((int)$user['roleId']) {
                             case 1:
                                 $roleLabel = 'Superadministrador';
                                 break;
@@ -55,22 +68,22 @@
                     ?>
                     <tr class="hover:bg-gray-50">
                         <td class="px-4 py-3 text-gray-700">
-                            <?= (int)$user->id ?>
+                            <?= (int)$user['id'] ?>
                         </td>
 
                         <td class="px-4 py-3 font-mono text-gray-900">
-                            <?= htmlspecialchars($user->username, ENT_QUOTES, 'UTF-8') ?>
+                            <?= htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8') ?>
                         </td>
 
                         <td class="px-4 py-3 text-gray-700">
-                            <?= htmlspecialchars($user->fullname ?? '', ENT_QUOTES, 'UTF-8') ?>
+                            <?= htmlspecialchars($user['fullname'] ?? '', ENT_QUOTES, 'UTF-8') ?>
                         </td>
 
                         <td class="px-4 py-3">
                             <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
-                                <?php if ((int)$user->roleId === 1): ?>
+                                <?php if ((int)$user['roleId'] === 1): ?>
                                     bg-purple-100 text-purple-800
-                                <?php elseif ((int)$user->roleId === 2): ?>
+                                <?php elseif ((int)$user['roleId'] === 2): ?>
                                     bg-blue-100 text-blue-800
                                 <?php else: ?>
                                     bg-gray-100 text-gray-800
@@ -80,7 +93,7 @@
                         </td>
 
                         <td class="px-4 py-3">
-                            <?php if ((int)$user->isActive === 1): ?>
+                            <?php if ((int)$user['isActive'] === 1): ?>
                                 <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
                                     Activo
                                 </span>
@@ -92,22 +105,30 @@
                         </td>
 
                         <td class="px-4 py-3 text-gray-500 text-xs">
-                            <?= htmlspecialchars($user->createdAt ?? '', ENT_QUOTES, 'UTF-8') ?>
+                            <?= htmlspecialchars($user['createdAt'] ?? '', ENT_QUOTES, 'UTF-8') ?>
                         </td>
 
                         <td class="px-4 py-3">
                             <div class="flex items-center gap-2">
-                                <a href="/users/edit/<?= (int)$user->id ?>"
+                                <a href="/users/edit/<?= (int)$user['id'] ?>"
                                    class="inline-flex items-center rounded-md border border-amber-500 px-2.5 py-1
                                           text-xs font-medium text-amber-700 bg-amber-50 hover:bg-amber-100">
                                     Editar
                                 </a>
-                                <a href="/users/delete/<?= (int)$user->id ?>"
-                                   class="inline-flex items-center rounded-md border border-red-600 px-2.5 py-1
-                                          text-xs font-medium text-red-700 bg-red-50 hover:bg-red-100"
-                                   onclick="return confirm('¿Estás seguro de eliminar este usuario?');">
-                                    Eliminar
-                                </a>
+                                <?php if ((int)$user['isActive'] === 1): ?>
+                                    <a href="/users/<?= (int)$user['id'] ?>/deactivate"
+                                       class="inline-flex items-center rounded-md border border-red-600 px-2.5 py-1
+                                              text-xs font-medium text-red-700 bg-red-50 hover:bg-red-100"
+                                       onclick="return confirm('¿Desactivar este usuario?');">
+                                        Desactivar
+                                    </a>
+                                <?php else: ?>
+                                    <a href="/users/<?= (int)$user['id'] ?>/activate"
+                                       class="inline-flex items-center rounded-md border border-green-600 px-2.5 py-1
+                                              text-xs font-medium text-green-700 bg-green-50 hover:bg-green-100">
+                                        Activar
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         </td>
                     </tr>
@@ -126,4 +147,3 @@
 </main>
 
 <?php require __DIR__ . '/../layouts/footer.php'; ?>
-

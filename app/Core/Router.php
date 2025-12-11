@@ -36,10 +36,8 @@ class Router
             if (preg_match($pattern, $uri, $matches) && $route['method'] === strtoupper($method)) {
                 array_shift($matches); // Remove full match
 
-                $this->callAction(
-                    ...explode('@', $route['controller']),
-                    params: $matches
-                );
+                [$controller, $action] = explode('@', $route['controller']);
+                $this->callAction($controller, $action, $matches);
                 return;
             }
         }

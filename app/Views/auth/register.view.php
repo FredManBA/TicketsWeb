@@ -3,7 +3,6 @@
 <div class="mt-10 flex items-center justify-center">
     <div class="w-full max-w-md">
         <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <!-- header del cuadro -->
             <div class="bg-slate-800 px-6 py-4">
                 <div class="flex items-center gap-3">
                     <div class="h-9 w-9 flex items-center justify-center rounded-lg bg-white text-neutral-900 text-xs font-bold leading-tight shadow">
@@ -20,7 +19,6 @@
                 </div>
             </div>
 
-            <!-- Espacios del cuadro -->
             <div class="px-6 py-6">
                 <?php if (isset($error)): ?>
                     <div class="mb-4 text-sm text-red-700 bg-red-100 border border-red-200 px-3 py-2 rounded-md">
@@ -29,6 +27,21 @@
                 <?php endif; ?>
 
                 <form action="/register" method="POST" class="space-y-4">
+                    <div>
+                        <label for="fullname" class="block text-sm font-medium text-gray-700">
+                            Nombre completo
+                        </label>
+                        <input
+                            type="text"
+                            id="fullname"
+                            name="fullname"
+                            required
+                            class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
+                                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Escribe el nombre completo"
+                        >
+                    </div>
+
                     <div>
                         <label for="username" class="block text-sm font-medium text-gray-700">
                             Usuario
@@ -46,7 +59,7 @@
 
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700">
-                            Contraseña
+                            Contrasena
                         </label>
                         <input
                             type="password"
@@ -55,13 +68,13 @@
                             required
                             class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
                                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="••••••••"
+                            placeholder="********"
                         >
                     </div>
 
                     <div>
                         <label for="confirm_password" class="block text-sm font-medium text-gray-700">
-                            Confirmar contraseña
+                            Confirmar contrasena
                         </label>
                         <input
                             type="password"
@@ -70,7 +83,7 @@
                             required
                             class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
                                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Vuelve a escribir la contraseña"
+                            placeholder="Vuelve a escribir la contrasena"
                         >
                     </div>
 
@@ -84,11 +97,10 @@
                 </form>
             </div>
 
-            <!-- final del cuadro-->
             <div class="px-6 pb-4 text-[11px] text-gray-500">
                 <p>
-                    ¿Ya tienes una cuenta?
-                    <a href="/login" class="text-blue-600 hover:underline">Inicia sesión aquí.</a>
+                    Ya tienes una cuenta?
+                    <a href="/login" class="text-blue-600 hover:underline">Inicia sesion aqui.</a>
                 </p>
             </div>
         </div>
