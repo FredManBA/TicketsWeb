@@ -27,17 +27,7 @@
 
             <!-- Nav de la pagina principal -->
             <nav class="hidden md:flex items-center gap-6 text-sm">
-                <a href="/"
-                   class="text-gray-200 hover:text-white hover:underline">
-                    Inicio
-                </a>
-
-                <?php if (!isset($_SESSION['user'])): ?>
-                    <a href="/login"
-                       class="text-gray-300 hover:text-white hover:underline">
-                        Iniciar sesion
-                    </a>
-                <?php else: ?>
+                <?php if (isset($_SESSION['user'])): ?>
                     <?php $roleId = $_SESSION['user']['roleId'] ?? null; ?>
                     <?php if ($roleId === 3): ?>
                         <a href="/user/dashboard"
@@ -66,8 +56,8 @@
             <div class="hidden md:flex items-center gap-4 text-sm">
                 <?php if (isset($_SESSION['user'])): ?>
                     <!-- Nombre de usuario + dropdown -->
-                    <div class="relative group">
-                        <button
+            <div class="relative">
+                        <button id="account-toggle"
                             class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-neutral-800 hover:bg-neutral-700">
                             <span class="text-xs text-gray-300">Mi cuenta</span>
                             <span class="font-semibold text-sm">
@@ -79,8 +69,8 @@
                                       d="M19 9l-7 7-7-7"/>
                             </svg>
                         </button>
-                        <div
-                            class="absolute right-0 mt-2 w-44 bg-neutral-900 border border-neutral-700 rounded-md shadow-lg py-1 text-sm hidden group-hover:block z-20">
+                       <div id="account-menu"
+                            class="absolute right-0 mt-2 w-44 bg-neutral-900 border border-neutral-700 rounded-md shadow-lg py-1 text-sm hidden z-20">
                             <a href="/profile"
                                class="block px-4 py-2 text-gray-200 hover:bg-neutral-800">
                                 Perfil
@@ -158,10 +148,25 @@
     <script>
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
+        const accountToggle = document.getElementById('account-toggle');
+        const accountMenu = document.getElementById('account-menu');
 
         if (menuToggle && mobileMenu) {
             menuToggle.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        if (accountToggle && accountMenu) {
+            accountToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                accountMenu.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!accountMenu.classList.contains('hidden')) {
+                    accountMenu.classList.add('hidden');
+                }
             });
         }
     </script>

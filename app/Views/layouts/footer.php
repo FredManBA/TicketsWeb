@@ -2,7 +2,7 @@
 
 </main> 
 
-<footer class="fixed bottom-0 w-full bg-neutral-900 text-gray-300 border-t border-neutral-800">
+<footer class="w-full bg-neutral-900 text-gray-300 border-t border-neutral-800 mt-8">
     <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
         <!-- Logo-->
         <div class="flex items-center gap-2">
